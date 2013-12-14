@@ -1,0 +1,142 @@
+*** Settings ***
+Library       		Selenium2Library
+
+
+*** Variables ***
+${LOGIN ADDRESS}	http://truongnha.com/login/
+${BROWSER}			ff
+${HOST}				http://truongnha.com
+${WELCOME PAGE}		${HOST}/school/
+${VIEW CLASSES}		${HOST}/school/viewClassDetail
+${VIEW SUBJECTS}	${HOST}/school/subjectPerClass
+${SUBJECT DETAIL}	${HOST}/school/viewSubjectDetail
+
+*** Keywords ***
+Open Login Page
+	Open Browser  ${LOGIN ADDRESS}  ${BROWSER}
+	
+Input Username  [Arguments]  ${username}
+    Input Text  id_username  ${username}
+
+Input Password  [Arguments]  ${password}
+    Input Text  id_password  ${password}
+
+Submit Login
+	Click Button  login
+	
+Login is Successful
+	Location Should Be 	${WELCOME PAGE}
+
+Login
+	Open Browser  ${LOGIN ADDRESS}  ${BROWSER}
+	Input Text  id_username	tungvn
+	Input Text  id_password	nhom14
+	Click Button  login
+	Location Should Be 	${WELCOME PAGE}
+
+Go To Home Page
+	Go To	${WELCOME PAGE}
+
+Select Classes To View Details
+	Click Link  /school/viewClassDetail/1502
+	Location Should Be 	${HOST}/school/viewClassDetail/1502
+
+Select Subject per Classes
+	Click Link 	btn-monhoc
+	Location Should Be 	${HOST}/school/subjectPerClass/1502
+
+Select Subject to view details
+	Click Link 	/school/viewSubjectDetail/21193
+	Location Should Be 	${HOST}/school/viewSubjectDetail/21193
+
+Select from list giaovienVuNgocTung
+	Select From List 	id_teacher_id	3414
+
+Select from list subjectMiThuat
+	Select From List 	id_type	Mĩ thuật
+
+Select from list subjectSinhHoc
+	Select From List 	id_type	Sinh học
+
+
+Input lesson per week	[Arguments]  ${num}
+	Input Text	id_number_lesson	${num}
+
+Input factor	[Arguments]	${num}
+	Input Text 	id_hs	${num}
+
+Input Subject Name	[Arguments]	${name}
+	Input Text 	id_name 	${name}
+
+
+
+Check nx Checkbox
+	Select Checkbox	id_nx
+
+Uncheck nx Checkbox
+	Unselect Checkbox 	id_nx
+
+
+
+Click Button Delete Subject
+	Click Button	xpath=//button[contains(@class, 'btn no-text btn-small deletion')]
+
+Click Button Sort
+	Click Button 	sort
+
+Click Button Sort Up
+	Click Button 	naviButton-up
+
+Click Button Sort Down
+	Click Button 	naviButton-down
+
+Click Button Advanced Menu
+	Click Button 	advanced
+
+Click Button To Add Subject
+	Click Button 	submit
+
+
+Submit input subject
+	Click Button	Lưu
+
+Submit Popup Delete Subject
+	Confirm Action
+
+
+
+Right Input subject
+	Page Should Contain	Bạn đã cập nhật thành công
+
+Success Delete Subject
+	Wait Until Page Contains	Đã xoá thành công.	1.5
+
+Success Sort
+	Wait Until Page Contains 	Đã lưu.	1.5
+
+Success Add Subject
+	Page Should Contain	Môn học mới đã được thêm.
+
+
+
+Err Input a wrong number lesson per week
+	Page Should Contain	Số tiết trong một tuần không được lớn hơn 10.
+
+Err Input a character lesson per week
+	Page Should Contain	Nhập một số tổng thể.
+
+Err Input a negative number lesson per week 
+	Page Should Contain	Số tiết trong một tuần không được nhỏ hơn 0.
+
+Err Input a wrong factor
+	Page Should Contain	Hệ số không được lớn hơn 3.
+
+Err Input a negative factor
+	Page Should Contain	Hệ số không được nhỏ hơn 0.
+
+Err Input a character
+	Page Should Contain	Nhập một số.
+
+Err not input subject name
+	Page Should Contain List	xpath=//div[contains(@class, 'notify')]/ul/ul/li[text()='Tên môn học phải chứa ít nhất một kí tự.']
+	Page Should Contain List	xpath=//div[contains(@class, 'notify')]/ul/ul/li[text()='Số tiết trong một tuần phải lớn hơn 0.']

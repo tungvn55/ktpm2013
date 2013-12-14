@@ -1,0 +1,120 @@
+*** Settings ***
+
+Resource	Keyword.txt
+
+*** Testcases ***
+Login Should Succeed When the Correct Username and Password are Entered
+	Login
+
+Test Case 1, Test Input lesson per week, input a right number
+	Select Classes To View Details
+	Select Subject per Classes
+	Select Subject to view details
+	Input lesson per week	5
+	Submit input lesson per week
+	Right Input
+
+Test Case 2, Test Input lessons per week, input a wrong number
+	Select Classes To View Details
+	Select Subject per Classes
+	Select Subject to view details
+	Input lesson per week	11
+	Submit input lesson per week 
+	Err Input a wrong number lesson per week 
+
+Test Case 3, Test Input lessons per week, input character
+	Select Classes To View Details
+	Select Subject per Classes
+	Select Subject to view details
+	Input lesson per week	a
+	Submit input lesson per week 
+	Err Input a character lesson per week
+
+Test Case 4, Test Input lessons per week, input a negative number 
+	Select Classes To View Details
+	Select Subject per Classes
+	Select Subject to view details
+	Input lesson per week	-1
+	Submit input subject
+	Err Input a negative number lesson per week 
+
+Test Case 5, Test Input factor, input a right factor
+	Select Classes To View Details
+	Select Subject per Classes
+	Select Subject to view details
+	Input factor	2.0
+	Submit input subject
+	Right Input subject
+
+Test Case 6, Test Input factor, input a wrong factor
+	Select Classes To View Details
+	Select Subject per Classes
+	Select Subject to view details
+	Input factor	5.0
+	Submit input subject
+	Err Input a wrong factor
+
+Test Case 7, Test Input factor, input a negative factor
+	Select Classes To View Details
+	Select Subject per Classes
+	Select Subject to view details
+	Input factor	5.0
+	Submit input subject
+	Err Input a negative factor
+
+Test Case 8, Test Input factor, input a character
+	Select Classes To View Details
+	Select Subject per Classes
+	Select Subject to view details
+	Input factor	a
+	Submit input subject
+	Err Input a character
+
+Test Case 9, Test Delete Available Subject
+	Select Classes To View Details
+	Select Subject per Classes
+	Click Button Delete Subject
+	Submit Popup Delete Subject
+	Success Delete Subject
+
+Test Case 10, Test Subject Sorting
+	Select Classes To View Details
+	Select Subject per Classes
+	Click Button Sort
+	Click Button Sort Up
+	Click Button Sort Down
+	Click Button Sort
+	Success Sort
+
+Test Case 11, Test Input Teachers, input an available teacher
+	Select Classes To View Details
+	Select Subject per Classes
+	Select Subject to view details
+	Select from list giaovienVuNgocTung
+	Submit input subject
+	Right Input subject
+
+Test Case 12, Test Input nx Checkbox, check the checkbox
+	Select Classes To View Details
+	Select Subject per Classes
+	Select Subject to view details
+	Check nx Checkbox
+	Submit input subject
+	Right Input subject
+
+Test Case 13, Test Input nx Checkbox, uncheck the checkbox
+	Select Classes To View Details
+	Select Subject per Classes
+	Select Subject to view details
+	Uncheck nx Checkbox
+	Submit input subject
+	Right Input subject
+
+Test Case 14, Test Add A Subject In Advanced Menu, input right subject name
+	Select Classes To View Details
+	Select Subject per Classes
+	Click Button Advanced Menu
+	Input Subject Name 	Mĩ Thuật
+	Select from list subjectMiThuat
+	Click Button To Add Subject
+	Success Add Subject
